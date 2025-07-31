@@ -3,7 +3,7 @@ import "strings"
 import "json"
 import "time"
 
-endpoint = "http://localhost:3000/comments"
+endpoint = "http://localhost:5000/posts"
 req = http.request(endpoint)
 response = http.get(req)
 
