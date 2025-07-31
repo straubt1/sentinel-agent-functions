@@ -1,0 +1,14 @@
+import "http"
+import "strings"
+import "json"
+import "time"
+
+endpoint = "http://localhost:3000/comments"
+req = http.request(endpoint)
+response = http.get(req)
+
+print("Response: " + response.body)
+
+main = rule {
+	true
+}
