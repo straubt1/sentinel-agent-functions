@@ -2,13 +2,34 @@ version: '3'
 
 dotenv: ['.env', 'secrets/.env']
 
+vars:
+  AGENT_NAME: "tt-local"
+  IMAGE_NAME: "straubt1/sentinel-broker-example"
+  IMAGE_TAG: "dev"
+
 tasks:
+  agent-build:
+    desc: Test
+    cmds:
+      - |
+        echo $DOCKER_DEFAULT_PLATFORM
+        docker build -t {{.IMAGE_NAME}}:{{.IMAGE_TAG}} .
+
   agent-start:
+    desc: Test
+    cmds: 
+      - |
+        docker run -d --rm --name my_custom_tfc_agent -e TFC_AGENT_TOKEN \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          --network host \
+          {{.IMAGE_NAME}}:{{.IMAGE_TAG}}
+  agent-hashicorp-start:
     desc: Test
     cmds: 
       - |
         docker run --rm --name my_tfc_agent -e TFC_AGENT_TOKEN \
           -v /var/run/docker.sock:/var/run/docker.sock \
+          --network host \
           hashicorp/tfc-agent:latest
   
   broker-start:
