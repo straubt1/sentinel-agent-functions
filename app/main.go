@@ -26,6 +26,7 @@ func main() {
 	})
 	r.Post("/timeNow", TimeNow)
 	r.Post("/parseHCL", ParseHCL)
+	r.Post("/xmlToJson", XmlToJson)
 
 	// Port configuration
 	port := 5000

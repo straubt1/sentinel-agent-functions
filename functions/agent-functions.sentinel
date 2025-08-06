@@ -11,13 +11,28 @@ func timeNow(){
 	endpoint = AGENT_ENDPOINT + "timeNow"
 	req = http.request(endpoint).with_body(json.marshal({}))
 	response = http.accept_status_codes(ACCEPTED_STATUS_CODES).post(req)
-	return json.unmarshal(response.body).time
+    response_json = json.unmarshal(response.body)
+
+	return response_json.time
 }
 
 # This is not implemented yet or working...
 func parseHCL(){
 	endpoint = AGENT_ENDPOINT + "parseHCL"
-	req = http.request(endpoint).with_body(json.marshal({}))
+	req = http.request(endpoint).with_body(json.marshal({
+        "Content": "resource \"example\" { name = \"test\" }",
+    }))
 	response = http.accept_status_codes(ACCEPTED_STATUS_CODES).post(req)
 	return response.body # json.unmarshal(response.body)
+}
+
+func xmlToJSON(xml){
+	endpoint = AGENT_ENDPOINT + "xmlToJson"
+	req = http.request(endpoint).with_body(json.marshal({
+        "Content": xml,
+    }))
+	response = http.accept_status_codes(ACCEPTED_STATUS_CODES).post(req)
+    response_json = json.unmarshal(response.body)
+
+	return json.unmarshal(response_json.json)
 }

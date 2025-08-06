@@ -8,8 +8,15 @@ import "agent-functions" as agent
 t = agent.timeNow()
 print("Time Now:", t)
 
-p = agent.parseHCL()
-print("Parsed HCL:", p)
+# p = agent.parseHCL()
+# print("Parsed HCL:", p)
+
+x = agent.xmlToJSON("<root><element>42</element></root>")
+if x != "" {
+	print("XML to Json:", x)
+	print("XML to Json: - root", x.root)
+	print("XML to Json: - root.element", x.root.element)
+}
 
 main = rule {
 	true
