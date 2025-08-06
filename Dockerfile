@@ -4,11 +4,12 @@ FROM golang:1.21-alpine AS builder
 WORKDIR /app
 
 # Create a simple Go web server
-COPY app/main.go .
+COPY app/*.go .
+COPY app/go.* .
 
-# Initialize Go module and build
-RUN go mod init webserver && \
-  go build -o webserver main.go
+
+# Go build
+RUN go build -o webserver .
 
 # Second stage: Use the TFC agent as base
 FROM hashicorp/tfc-agent:latest
