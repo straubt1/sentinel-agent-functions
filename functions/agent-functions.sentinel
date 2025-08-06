@@ -14,9 +14,10 @@ func timeNow(){
 	return json.unmarshal(response.body).time
 }
 
+# This is not implemented yet or working...
 func parseHCL(){
 	endpoint = AGENT_ENDPOINT + "parseHCL"
 	req = http.request(endpoint).with_body(json.marshal({}))
 	response = http.accept_status_codes(ACCEPTED_STATUS_CODES).post(req)
-	return json.unmarshal(response.body).json
+	return response.body # json.unmarshal(response.body)
 }
