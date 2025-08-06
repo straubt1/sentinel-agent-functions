@@ -13,6 +13,9 @@ import (
 // Parse HCL
 // substring
 
+// Single error status code for all functions (keep it simple)
+const ERROR_STATUS = http.StatusInternalServerError
+
 func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.RequestID)
@@ -22,6 +25,7 @@ func main() {
 		w.Write([]byte("welcome"))
 	})
 	r.Post("/timeNow", TimeNow)
+	r.Post("/parseHCL", ParseHCL)
 
 	// Port configuration
 	port := 5000

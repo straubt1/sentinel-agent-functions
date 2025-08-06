@@ -2,12 +2,14 @@ import "http"
 import "strings"
 import "json"
 import "time"
+import "agent-functions" as agent
 
-endpoint = "http://localhost:5000/posts"
-req = http.request(endpoint)
-response = http.get(req)
 
-print("Response: " + response.body)
+t = agent.timeNow()
+print("Time Now:", t)
+
+p = agent.parseHCL()
+print("Parsed HCL:", p)
 
 main = rule {
 	true

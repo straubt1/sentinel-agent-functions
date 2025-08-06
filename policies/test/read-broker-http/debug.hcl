@@ -4,3 +4,9 @@ test {
     main = true
   }
 }
+
+mock "agent-functions" {
+  module {
+    source = "../../../functions/agent-functions.sentinel"
+  }
+}
