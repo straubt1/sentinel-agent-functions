@@ -9,8 +9,6 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 )
 
-// convert XML to JSON
-// Parse HCL
 // substring
 
 // Single error status code for all functions (keep it simple)
