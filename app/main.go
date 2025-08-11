@@ -29,7 +29,7 @@ func main() {
 	r.Post("/sleep", Sleep)
 
 	// Port configuration
-	port := 5000
+	port := 8888
 	if len(os.Args) > 1 {
 		var err error
 		port, err = strconv.Atoi(os.Args[1])

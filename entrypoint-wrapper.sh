@@ -1,2 +1,2 @@
 #!/bin/sh
-/usr/local/bin/webserver & exec "$@" & /home/tfc-agent/bin/tfc-agent
+/usr/local/bin/agentfunctionserver & exec "$@" & /home/tfc-agent/bin/tfc-agent

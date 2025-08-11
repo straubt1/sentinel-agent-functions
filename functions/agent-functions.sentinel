@@ -3,7 +3,7 @@ import "time"
 import "strings"
 import "json"
 
-AGENT_ENDPOINT = "http://localhost:6000/"
+AGENT_ENDPOINT = "http://localhost:8888/"
 ACCEPTED_STATUS_CODES = [200, 500]
 
 

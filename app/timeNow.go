@@ -24,7 +24,6 @@ func TimeNow(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	resp := TimeNowOutputs{
-		// Time: time.Now().UTC().String(),
 		Time: time.Now().UTC().Format(time.RFC3339),
 	}
 	w.Header().Set("Content-Type", "application/json")
