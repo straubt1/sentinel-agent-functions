@@ -9,19 +9,19 @@ vars:
 
 tasks:
   agent-build:
-    desc: Test
+    desc: Build the Terraform Agent
     cmds:
       - |
         echo $DOCKER_DEFAULT_PLATFORM
         docker build -t {{.IMAGE_NAME}}:{{.IMAGE_TAG}} .
 
   agent-start:
-    desc: Test
+    desc: Start the Terraform Agent and connect to HCP Terraform
     cmds: 
       - |
         docker run -d --rm --name my_custom_tfc_agent -e TFC_AGENT_TOKEN \
           -v /var/run/docker.sock:/var/run/docker.sock \
-          -p 5000:5000 \
+          -p 6000:5000 \
           {{.IMAGE_NAME}}:{{.IMAGE_TAG}}
   agent-hashicorp-start:
     desc: Test

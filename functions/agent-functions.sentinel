@@ -3,7 +3,7 @@ import "time"
 import "strings"
 import "json"
 
-AGENT_ENDPOINT = "http://localhost:5000/"
+AGENT_ENDPOINT = "http://localhost:6000/"
 ACCEPTED_STATUS_CODES = [200, 500]
 
 
@@ -14,6 +14,17 @@ func timeNow(){
     response_json = json.unmarshal(response.body)
 
 	return response_json.time
+}
+
+func sleep(duration){
+	endpoint = AGENT_ENDPOINT + "sleep"
+	req = http.request(endpoint).with_body(json.marshal({
+		"duration": duration,
+	}))
+	response = http.accept_status_codes(ACCEPTED_STATUS_CODES).post(req)
+	response_json = json.unmarshal(response.body)
+
+	return response_json.message
 }
 
 # This is not implemented yet or working...
