@@ -23,8 +23,19 @@ func TimeNow(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid JSON", ERROR_STATUS)
 		return
 	}
+
+	// check for specific formats or if non-empty, else use default
+	format := time.RFC3339 //default
+	if data.Format == "RFC3339" {
+		format = time.RFC3339
+	} else if data.Format == "RFC3339Nano" {
+		format = time.RFC3339Nano
+	} else if data.Format != "" {
+		format = data.Format
+	}
+
 	resp := TimeNowOutputs{
-		Time: time.Now().UTC().Format(time.RFC3339),
+		Time: time.Now().UTC().Format(format),
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(resp)
