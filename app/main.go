@@ -22,23 +22,23 @@ func main() {
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("welcome"))
 
-		processes, err := os.ReadDir("/proc")
-		if err != nil {
-			http.Error(w, "Failed to read /proc", ERROR_STATUS)
-			return
-		}
-		w.Write([]byte("\nAvailable processes:\n"))
-		for _, entry := range processes {
-			w.Write([]byte(entry.Name() + "\n"))
+		// processes, err := os.ReadDir("/proc")
+		// if err != nil {
+		// 	http.Error(w, "Failed to read /proc", ERROR_STATUS)
+		// 	return
+		// }
+		// w.Write([]byte("\nAvailable processes:\n"))
+		// for _, entry := range processes {
+		// 	w.Write([]byte(entry.Name() + "\n"))
 
-			println(entry.Name())
-			// if entry.IsDir() {
-			// 	// /proc directories with numeric names are processes
-			// 	if _, err := strconv.Atoi(entry.Name()); err == nil {
-			// 		w.Write([]byte(entry.Name() + "\n"))
-			// 	}
-			// }
-		}
+		// 	println(entry.Name())
+		// 	// if entry.IsDir() {
+		// 	// 	// /proc directories with numeric names are processes
+		// 	// 	if _, err := strconv.Atoi(entry.Name()); err == nil {
+		// 	// 		w.Write([]byte(entry.Name() + "\n"))
+		// 	// 	}
+		// 	// }
+		// }
 	})
 	r.Post("/timeNow", TimeNow)
 	r.Post("/parseHCL", ParseHCL)
