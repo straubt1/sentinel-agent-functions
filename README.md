@@ -69,6 +69,17 @@ There are a few moving pieces in this architecture:
 +-----------------------+
 | Policy Decision       |
 +-----------------------+
+
+```
+
+```mermaid
+flowchart TD
+    A[Sentinel Policy Run<br/>(inside Agent exec)]
+    B[Go Function Server<br/>/timeNow /sleep ...]
+    C[Policy Decision]
+
+    A -->|HTTP POST (localhost)| B
+    B -->|JSON response| C
 ```
 
 ### Implementation
