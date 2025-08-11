@@ -51,6 +51,26 @@ There are a few moving pieces in this architecture:
 3. Sentinel Policy Set with a Policy that calls the agent functions
   - There is a demo implementation: `./policies/demo-agent-functions.sentinel`
 
+```text
++-----------------------+
+| Sentinel Policy Run   |
+|  (inside Agent exec)  |
++-----------+-----------+
+	|         |
+	|         | HTTP POST (localhost)
+	|         v
++-----------------------+
+| Go Function Server    |
+|  /timeNow /sleep ...  |
++-----------+-----------+
+	|         |
+	|         | JSON response
+	|         v
++-----------------------+
+| Policy Decision       |
++-----------------------+
+```
+
 ### Implementation
 
 To run the agent functions in a Sentinel Policy, you can build and run the Docker container and connect it to a Agent Pool in HCP Terraform (be sure you have an HCP Terraform Premium Organization).
