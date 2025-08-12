@@ -51,7 +51,7 @@ There are a few moving pieces in this architecture:
 3. Sentinel Policy Set with a Policy that calls the agent functions
   - There is a demo implementation: `./policies/demo-agent-functions.sentinel`
 
-```
+```mermaid
 ---
 config:
   theme: forest
