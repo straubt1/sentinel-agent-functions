@@ -6,19 +6,18 @@ import "json"
 AGENT_ENDPOINT = "http://localhost:8888/"
 ACCEPTED_STATUS_CODES = [200, 500]
 
-
-func timeNow(format){
+func timeNow(format) {
 	endpoint = AGENT_ENDPOINT + "timeNow"
 	req = http.request(endpoint).with_body(json.marshal({
 		"format": format,
 	}))
 	response = http.accept_status_codes(ACCEPTED_STATUS_CODES).post(req)
-    response_json = json.unmarshal(response.body)
+	response_json = json.unmarshal(response.body)
 
 	return response_json.time
 }
 
-func sleep(duration){
+func sleep(duration) {
 	endpoint = AGENT_ENDPOINT + "sleep"
 	req = http.request(endpoint).with_body(json.marshal({
 		"duration": duration,
@@ -29,23 +28,13 @@ func sleep(duration){
 	return response_json.message
 }
 
-# This is not implemented yet or working...
-func parseHCL(){
-	endpoint = AGENT_ENDPOINT + "parseHCL"
-	req = http.request(endpoint).with_body(json.marshal({
-        "Content": "resource \"example\" { name = \"test\" }",
-    }))
-	response = http.accept_status_codes(ACCEPTED_STATUS_CODES).post(req)
-	return response.body # json.unmarshal(response.body)
-}
-
-func xmlToJSON(xml){
+func xmlToJSON(xml) {
 	endpoint = AGENT_ENDPOINT + "xmlToJson"
 	req = http.request(endpoint).with_body(json.marshal({
-        "Content": xml,
-    }))
+		"Content": xml,
+	}))
 	response = http.accept_status_codes(ACCEPTED_STATUS_CODES).post(req)
-    response_json = json.unmarshal(response.body)
+	response_json = json.unmarshal(response.body)
 
 	return json.unmarshal(response_json.json)
 }
