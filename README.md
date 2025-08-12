@@ -51,35 +51,17 @@ There are a few moving pieces in this architecture:
 3. Sentinel Policy Set with a Policy that calls the agent functions
   - There is a demo implementation: `./policies/demo-agent-functions.sentinel`
 
-```text
-+-----------------------+
-| Sentinel Policy Run   |
-|  (inside Agent exec)  |
-+-----------+-----------+
-	|         |
-	|         | HTTP POST (localhost)
-	|         v
-+-----------------------+
-| Go Function Server    |
-|  /timeNow /sleep ...  |
-+-----------+-----------+
-	|         |
-	|         | JSON response
-	|         v
-+-----------------------+
-| Policy Decision       |
-+-----------------------+
-
 ```
-
-```mermaid
+---
+config:
+  theme: forest
+  layout: fixed
+---
 flowchart TD
-    A[Sentinel Policy Run<br/>(inside Agent exec)]
-    B[Go Function Server<br/>/timeNow /sleep ...]
-    C[Policy Decision]
-
-    A -->|HTTP POST (localhost)| B
-    B -->|JSON response| C
+    A["Agent Start"] --> B["Start Webserver"] & C["Policy Code"]
+    C -- "POST" /timeNow--> B
+    B -- "2025-08-11T21:34:11Z" --> C
+    C --> D["Policy Decision"]
 ```
 
 ### Implementation
