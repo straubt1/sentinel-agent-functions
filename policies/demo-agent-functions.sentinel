@@ -1,0 +1,32 @@
+import "http"
+import "strings"
+import "json"
+import "time"
+import "agent-functions" as agent
+
+timeNano = agent.timeNow("RFC3339Nano")
+print("timeNow() Nano:", timeNano)
+timeCustom = agent.timeNow("Monday, 02-Jan-06 15:04:05 MST")
+print("timeNow() Custom:", timeCustom)
+
+start = agent.timeNow("")
+print("timeNow():", start)
+
+sleep = agent.sleep(1000)
+print("sleep():", sleep)
+
+stop = agent.timeNow("")
+print("timeNow():", stop)
+final = time.load(stop).sub(start)
+print("sleep() Duration:", final / 1000000, "ms")
+
+x = agent.xmlToJSON("<root><element>42</element></root>")
+if x != "" {
+	print("xmlToJSON():", x)
+	print("xmlToJSON(): - root", x.root)
+	print("xmlToJSON(): - root.element", x.root.element)
+}
+
+main = rule {
+	true
+}
