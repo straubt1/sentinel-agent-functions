@@ -54,8 +54,8 @@ There are a few moving pieces in this architecture:
 ```mermaid
 ---
 config:
-  theme: forest
-  layout: fixed
+  theme: mc
+  layout: dagre
 ---
 flowchart TD
     A["Agent Start"] --> B["Start Webserver"] & C["Policy Code"]
