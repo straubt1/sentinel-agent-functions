@@ -1,18 +1,14 @@
 # sentinel-agent-functions
 
-This repository contains an example implementation of what I am calling "Sentinel Agent Functions". The concept here is to leverage Go code to extend the capabilities of Sentinel policies.
-
-The agent functions are exposed via an HTTP API and can be integrated with HashiCorp Sentinel policies.
+"Sentinel Agent Functions" let you extend Sentinel policy capabilities by calling Go functions through an internal HTTP API. This is useful for scenarios where Sentinel’s native language falls short (such as XML parsing or time calculations).
 
 ## Challenge
 
 [Extending Sentinel with Plugins](https://developer.hashicorp.com/sentinel/docs/extending/plugins) is a feature of Sentinel, however, this has not been implemented in HCP Terraform or Terraform Enterprise.
 
-What this means is that we are unable to natively extend Sentinel Policies for use cases that require functionality outside of what the Sentinel language can do.
-
 When writing policies to meet complex organizational requirements, I am often limited by what the language can do.
 
-A few examples are:
+A few examples below that are either very difficult to code in Sentinel, or impossible:
 
 - Converting XML to JSON
 - Sleeping to wait
@@ -22,7 +18,7 @@ A few examples are:
 
 I created this repository to demonstrate a kind of framework that would allow me to create Go functions that I could call from Sentinel policies, starting with a few common use cases I have run into in the past.
 
-Adding new functions should be straight forward and involve minimal changes to the existing codebase.
+Adding new functions should be straightforward and involve minimal changes to the existing codebase.
 
 ## Requirements
 
@@ -31,12 +27,12 @@ In order for this framework to work, you need to have the following:
 - HCP Terraform Premium or Terraform Enterprise
 - Using Terraform Agents
   - [HCP Terraform Agents](https://developer.hashicorp.com/terraform/cloud-docs/agents)
-  - [TFE Terraform AAgents](https://developer.hashicorp.com/terraform/enterprise/application-administration/agents-on-tfe)
-- Policy Set execution set to "Agent"
+  - [TFE Terraform Agents](https://developer.hashicorp.com/terraform/enterprise/application-administration/agents-on-tfe)
+- Policy Set must be configured to execute via Terraform Agents.
 
 ## How does this work?
 
-Magic. Well, not really but is does involve some cheeky bits.
+Magic. Well, not really but it does involve some cheeky bits.
 
 Essentially the agent functions are implemented as HTTP endpoints (one for each function) on a webserver that is only exposed internally to the container running the Sentinel Policy. The policy can then call these endpoints to "execute" the functions.
 
@@ -44,7 +40,7 @@ Essentially the agent functions are implemented as HTTP endpoints (one for each 
 
 There are a few moving pieces in this architecture:
 
-1. Webserver hosting HTTP endpoints for each function
+1. Webserver hosting HTTP endpoints for each function to handle execution requests from Sentinel
   - This is implemented with the code in the `./app` folder
 2. Custom Terraform Agent
   - This is built using the `./Dockerfile`
@@ -84,7 +80,7 @@ To develop and test the agent functions you can build and run the Docker contain
 
 ## Web Server
 
-The web server leverages `go-chi` to give a lightweight and idiomatic way to build HTTP services in Go and is completely contained within the `./app` directory.
+The webserver leverages `go-chi` to give a lightweight and idiomatic way to build HTTP services in Go and is completely contained within the `./app` directory.
 
 ### main.go
 
@@ -141,7 +137,7 @@ func Foo(w http.ResponseWriter, r *http.Request) {
 
 ## Sentinel
 
-Rather than call the agent functions directly, I wrapped things in a repeatable way using `./functions/agent-functions.sentinel`. This should allow for each portability and keep the data transformation complexities centralized. The policy code will call these functions like any other, abstracting away the implementation.
+Rather than call the agent functions directly, I wrapped things in a repeatable way using `./functions/agent-functions.sentinel`. This should ease portability and keep the data transformation complexities centralized. The policy code will call these functions like any other, abstracting away the implementation.
 
 This function file does have some local variables to help with extensibility.
 
