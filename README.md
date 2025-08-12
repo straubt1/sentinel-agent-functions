@@ -1,6 +1,6 @@
 # sentinel-agent-functions
 
-This repository contains an example implementation of custom Sentinel agent functions using Go. In other words, leveraging Go code to extend the capabilities of Sentinel policies.
+This repository contains an example implementation of what I am calling "Sentinel Agent Functions". The concept here is to leverage Go code to extend the capabilities of Sentinel policies.
 
 The agent functions are exposed via an HTTP API and can be integrated with HashiCorp Sentinel policies.
 
@@ -141,9 +141,9 @@ func Foo(w http.ResponseWriter, r *http.Request) {
 
 ## Sentinel
 
-Rather than call the agent function directly, I wrapped things in a repeatable way using `./functions/agent-functions.sentinel`.
+Rather than call the agent functions directly, I wrapped things in a repeatable way using `./functions/agent-functions.sentinel`. This should allow for each portability and keep the data transformation complexities centralized. The policy code will call these functions like any other, abstracting away the implementation.
 
-This function does have some local variables to help with extensibility.
+This function file does have some local variables to help with extensibility.
 
 An example using the `timeNow` function:
 
@@ -171,3 +171,11 @@ print("timeNow():", start)
 
 - [Sentinel Documentation](https://docs.sentinel.dev)
 - [Go Chi](https://github.com/go-chi/chi)
+
+## License
+
+See LICENSE file.
+
+## Disclaimer
+
+This repository is an example pattern. It is not audited for production security. Use at your own discretion and review before adopting in regulated environments.
