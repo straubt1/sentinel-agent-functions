@@ -4,6 +4,11 @@ import "json"
 import "time"
 import "agent-functions" as agent
 
+import "plugin_example" as pe
+
+
+print(pe.test("a"))
+
 timeNano = agent.timeNow("RFC3339Nano")
 print("timeNow() Nano:", timeNano)
 timeCustom = agent.timeNow("Monday, 02-Jan-06 15:04:05 MST")
@@ -12,8 +17,8 @@ print("timeNow() Custom:", timeCustom)
 start = agent.timeNow("")
 print("timeNow():", start)
 
-sleep = agent.sleep(60000)
-print("sleep():", sleep)
+# sleep = agent.sleep(60000)
+# print("sleep():", sleep)
 
 stop = agent.timeNow("")
 print("timeNow():", stop)
