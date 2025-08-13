@@ -1,4 +1,4 @@
-policy "read-broker-http" {
-  source            = "./policies/read-broker-http.sentinel"
+policy "demo-agent-functions" {
+  source            = "./policies/demo-agent-functions.sentinel"
   enforcement_level = "advisory"
 }
