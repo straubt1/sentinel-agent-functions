@@ -12,7 +12,7 @@ print("timeNow() Custom:", timeCustom)
 start = agent.timeNow("")
 print("timeNow():", start)
 
-sleep = agent.sleep(1000)
+sleep = agent.sleep(100000)
 print("sleep():", sleep)
 
 stop = agent.timeNow("")
