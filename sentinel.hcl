@@ -3,7 +3,7 @@ import "module" "agent-functions" {
 }
 
 import "plugin" "plugin_example" {
-  source = "./policies/sentinel-plugin-tfresources"
+  source = "./policies/sentinel-plugin-example"
 }
 
 policy "demo-agent-functions" {
